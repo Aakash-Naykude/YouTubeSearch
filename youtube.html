@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Search</title>
+    <style>
+        #videos {
+            display: grid;
+            grid-template-columns: repeat(4, 20%);
+            grid-gap: 5%;
+        }
+    </style>
+  </head>
+  <body>
+      <div style="display: flex;">
+            <div style="margin-left: 6%;">
+                <img src="https://www.youtube.com/img/desktop/supported_browsers/yt_logo_rgb_light.png" style="width: 150px; height: 40px;"/>
+            </div>
+            <div style="margin-left: 10%; margin-top: 0.3%;">
+                <input type="text" id="query" placeholder="Search for a Video" style="width: 500px; height: 30px;"/>
+                <button onclick="searchVideos()" style="height: 35px;">Search</button>
+            </div>sd
+      </div>
+    
+
+      <div style="display: flex; margin: 2%;">
+        <div>
+            <h2>Home</h2>
+            <h2>Subscription</h2>
+            <h2>Explore</h2>
+            <hr/>
+            <h2>Library</h2>
+            <h2>History</h2>
+            <h2>Your videos</h2>
+        </div>
+        <div id="videos"></div>
+      </div>
+    
+  </body>
+</html>
+<script>
+//AIzaSyBo6Lq4eItDATwbEM4DhdvVSXKdTEYjaaU
+//https://youtube.googleapis.com/youtube/v3/search?q=csk&type=video&key=[YOUR_API_KEY]
+let v = document.getElementById('videos')
+async function searchVideos(){
+    let inpu = document.getElementById("query").value;
+    let res = await fetch(
+    `https://youtube.googleapis.com/youtube/v3/search?q=${inpu}&type=video&key=AIzaSyBo6Lq4eItDATwbEM4DhdvVSXKdTEYjaaU&maxResults=20`)
+    let data = await res.json()
+    console.log(data)
+    appendVideos(data.items)
+}
+
+function appendVideos(d){
+    v.innerHTML = null;
+    d.forEach(({ id:{videoId} })=>{
+        let div = document.createElement('div')
+        div.innerHTML = `<iframe width="300" height="210" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+        div.style.marginLeft = "20px"
+        v.append(div)
+    })
+}
+</script>
