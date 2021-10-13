@@ -21,7 +21,7 @@
             <div style="margin-left: 10%; margin-top: 0.3%;">
                 <input type="text" id="query" placeholder="Search for a Video" style="width: 500px; height: 30px;"/>
                 <button onclick="searchVideos()" style="height: 35px;">Search</button>
-            </div>sd
+            </div>
       </div>
     
 
@@ -43,13 +43,20 @@
 <script>
 //AIzaSyBo6Lq4eItDATwbEM4DhdvVSXKdTEYjaaU
 //https://youtube.googleapis.com/youtube/v3/search?q=csk&type=video&key=[YOUR_API_KEY]
+//https://youtube.googleapis.com/youtube/v3/search?onBehalfOfContentOwner=Satara&order=title&q=popu
+//https://youtube.googleapis.com/youtube/v3/search?q=popular%20in%20India%20&type=video&key=AIzaSyBo6Lq4eItDATwbEM4DhdvVSXKdTEYjaaU
+
+
+
+
+
 let v = document.getElementById('videos')
 async function searchVideos(){
     let inpu = document.getElementById("query").value;
     let res = await fetch(
     `https://youtube.googleapis.com/youtube/v3/search?q=${inpu}&type=video&key=AIzaSyBo6Lq4eItDATwbEM4DhdvVSXKdTEYjaaU&maxResults=20`)
     let data = await res.json()
-    console.log(data)
+    //console.log(data)
     appendVideos(data.items)
 }
 
@@ -62,4 +69,27 @@ function appendVideos(d){
         v.append(div)
     })
 }
+
+
+async function video(){
+    let res = await fetch("https://youtube.googleapis.com/youtube/v3/search?q=popular%20in%20India%20&type=video&key=AIzaSyBo6Lq4eItDATwbEM4DhdvVSXKdTEYjaaU&maxResults=10`");
+    let data = await res.json()
+    console.log(data)
+    direct(data.items)
+}
+video()
+function direct(d){
+    console.log(d)
+    // v.innerHTML = null;
+    // let gg = document.createElement('h3')
+    // gg.innerText = "Popular in India"
+    // v.append(gg)
+    d.forEach(({ id:{videoId} })=>{
+        let div = document.createElement('div')
+        div.innerHTML = `<iframe width="300" height="210" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        div.style.marginLeft = "20px";
+        v.append(div)
+    })
+}
 </script>
+
