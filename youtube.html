@@ -22,6 +22,11 @@
                 <input type="text" id="query" placeholder="Search for a Video" style="width: 500px; height: 30px;"/>
                 <button onclick="searchVideos()" style="height: 35px;">Search</button>
             </div>
+            <div style="margin-left: 400px;">
+                <h3 id="username">
+
+                </h3>
+            </div>
       </div>
     
 
@@ -96,5 +101,9 @@ function direct(d){
     })
 }
 
-
+let udata = JSON.parse(localStorage.getItem('utube'))
+console.log(udata.length)
+let h = document.getElementById('username')
+h.innerText = null;
+h.append(udata[udata.length-1])
 </script>
