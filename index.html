@@ -20,11 +20,11 @@
         }
         #left{
             text-align: center;
-            width: 15%;
+            width: 13%;
             position: fixed;
         }
         #right{
-            margin-left: 16%;
+            margin-left: 13%;
         }
     </style>
   </head>
@@ -114,8 +114,8 @@ function direct(d){
     vid.append(gg)
     d.forEach(({ id:{videoId} })=>{
         let div = document.createElement('div')
-        div.innerHTML = `<iframe width="320" height="230" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-        div.style.marginLeft = "20px";
+        div.innerHTML = `<iframe width="310" height="220" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        div.style.marginLeft = "10px";
         v.append(div)
     })
 }
